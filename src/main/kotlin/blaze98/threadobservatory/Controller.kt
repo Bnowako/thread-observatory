@@ -11,13 +11,17 @@ class Controller() {
 
     @GetMapping("suspend")
     suspend fun suspendFunction() {
-        delay(5000)
+        measureTime("suspend 5s") {
+            delay(5000)
+        }
     }
 
     @GetMapping("runBlocking")
     fun runBlocking() {
         kotlinx.coroutines.runBlocking {
-            delay(5000)
+            measureTime("runBlocking 5s") {
+                delay(5000)
+            }
         }
     }
 }
