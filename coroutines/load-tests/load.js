@@ -16,6 +16,6 @@ export const options = {
 };
 
 export default function () {
-  http.get('http://localhost:8080/coroutines/runBlocking');
+  http.get('http://localhost:8080/coroutines/thread-sleep');
   sleep(1);
 }
