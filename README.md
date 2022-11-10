@@ -1,28 +1,35 @@
 Want to see what is happening to threads in your application?
 
 Requirements
- - Java 17
- - Docker
- - K6 run:  
+
+- Java 17
+- Docker
+- K6 run:
+
 ```bash
 brew install k6
 ```
 
-
 1. In docker-compose.yml add host ip
 
-
-
 ### Thread observatory for:
- - Classic thread per request server
- - Coroutine based server
+
+- Classic thread per request server
+- Coroutine based server
 
 `Work in progress phase!`
 
+# Docs
 
-## Docs
+## JVM arguments
 
-Sample usage of k6 scripts
+Remember that the key thing is to tune JVM parameters
+
+JVM start heap size: ```-Xms512m```
+JVM max heap size: ```-Xmx512m```
+
+## k6 scripts
+
 ### sleep.js
 
 This will mitigate waiting for some resource
