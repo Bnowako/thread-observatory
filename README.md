@@ -28,13 +28,9 @@ Remember that the key thing is to tune JVM parameters
 JVM start heap size: ```-Xms512m```
 JVM max heap size: ```-Xmx512m```
 
-## k6 scripts
+# k6 scripts
 
-### sleep.js
-
-This will mitigate waiting for some resource
-
-Variables:
+### Variables for all scripts:
 
 | Name              |    Type     | Default |
 |-------------------|:-----------:|--------:|
@@ -42,6 +38,29 @@ Variables:
 | DURATION          |  number(s)  |      10 |
 | RATE              | number(rps) |      10 |
 
+
+## sleep.js
+
+This will mitigate waiting for some resource
+### Specific variable
+
+| Name              |    Type     | Default |
+|-------------------|:-----------:|--------:|
+| SLEEP_TIME_MILLIS |   number    |    1000 |
+
 ```bash
 k6 run -e SLEEP_TIME_MILLIS=100 -e RATE=30 -e DURATION=10 load-tests/sleep.js
+```
+
+## sleep.js
+
+This will mitigate waiting for some resource
+### Specific variable
+
+| Name          |  Type  | Default |
+|---------------|:------:|--------:|
+| OBJECTS_COUNT | number |     100 |
+
+```bash
+k6 run -e OBJECTS_COUNT=2115 load-tests/spawn.js 
 ```
