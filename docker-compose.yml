@@ -11,6 +11,11 @@ services:
       - 'localhost:{host_ip_address}'
   grafana:
     image: grafana/grafana
+    command:
+      '--config /custom/grafana/config.ini'
+    volumes:
+      - ./metrics-config/grafana/config.yml:/custom/grafana/config.ini
+      - ./metrics-config/grafana/dashboards:/etc/dashboards
     ports:
       - "3000:3000"
     extra_hosts:
