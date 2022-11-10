@@ -1,5 +1,14 @@
 Want to see what is happening to threads in your application?
 
+Requirements
+ - Java 17
+ - Docker
+ - K6 run:  
+```bash
+brew install k6
+```
+
+
 1. In docker-compose.yml add host ip
 
 
@@ -9,3 +18,13 @@ Want to see what is happening to threads in your application?
  - Coroutine based server
 
 `Work in progress phase!`
+
+
+## Docs
+
+Sample usage of k6 scripts
+### sleep.js
+This will mitigate waiting for some resource
+```bash
+k6 run -e SLEEP_TIME_MILLIS=100 load-tests/sleep.js
+```
