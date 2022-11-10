@@ -15,6 +15,8 @@ class Controller {
 
     @GetMapping("/objects/spawn")
     fun createObjects(@RequestParam("count", required = false) count: Int?) {
+        //todo this code will be optimized by compiler
+        // it will be cheat compiler somehow
         println("/objects/spawn called with count: $count")
         val heapObjects: MutableList<HeapObject> = mutableListOf()
         for(i in 0..(count ?: 10)) {

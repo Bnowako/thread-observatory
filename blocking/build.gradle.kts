@@ -23,6 +23,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.boot:spring-boot-starter-actuator:2.3.12.RELEASE")
     implementation("io.micrometer:micrometer-registry-prometheus:1.10.0")
+    testImplementation(kotlin("test"))
 }
 
 tasks.withType<KotlinCompile> {
