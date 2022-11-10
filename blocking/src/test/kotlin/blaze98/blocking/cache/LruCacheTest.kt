@@ -38,35 +38,41 @@ internal class LruCacheTest {
 
     @Test
     fun size_constrained() {
-        val cache = LruCache<String, String>(1)
+        val cache = LruCache<String, String>(4)
         cache["a"] = "testa"
         cache["b"] = "testb"
         cache["c"] = "testc"
+        cache["d"] = "testd"
+        cache["e"] = "teste"
 
         val resulta = cache["a"]
         val resultb = cache["b"]
         val resultc = cache["c"]
+        val resultd = cache["d"]
+        val resulte = cache["e"]
 
-        assertEquals(resulta, null)
-        assertEquals(resultb, null)
-        assertEquals(resultc, "testc")
+        assertEquals(resulta,null )
+        assertEquals(resultb,"testb" )
+        assertEquals(resultc,"testc" )
+        assertEquals(resultd,"testd" )
+        assertEquals(resulte,"teste" )
     }
 
     @Test
     fun used_keys_should_be_longer_in_cache() {
-        val cache = LruCache<String, String>(1)
+        val cache = LruCache<String, String>(2)
         cache["a"] = "testa"
         cache["b"] = "testb"
-        cache["c"] = "testc"
         val value = cache["a"]
+        cache["c"] = "testc"
 
         val resulta = cache["a"]
         val resultb = cache["b"]
         val resultc = cache["c"]
 
-        assertEquals(resulta, "a")
+        assertEquals(resulta, "testa")
         assertEquals(resultb, null)
-        assertEquals(resultc, null)
+        assertEquals(resultc, "testc")
     }
 
 }

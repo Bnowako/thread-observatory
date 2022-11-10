@@ -1,9 +1,9 @@
 package blaze98.blocking.cache
 
-class LruCache<K, V>(override val size: Int): Cache<K, V> {
-    private val map = HashMap<K, V>(size)
-    private var tail: Node<K> = Node(null)
-    private var head: Node<K> = Node(null)
+class LruCache<K, V>(override val size: Int) : Cache<K, V> {
+    private val map = HashMap<K, Node<K, V>>(size)
+    private val tail: Node<K, V> = Node(null, null)
+    private val head: Node<K, V> = Node(null, null)
 
     init {
         head.next = tail
@@ -11,29 +11,25 @@ class LruCache<K, V>(override val size: Int): Cache<K, V> {
     }
 
     override fun get(key: K): V? {
-        if(head.key == key) return map[key]
-        val newNode = Node(key)
-        head.next = newNode
-        head = newNode
-        return map[key]
+        val node = map[key] ?: return null
+        node.remove()
+        head.addAsNext(node)
+        return node.value
     }
 
     override fun set(key: K, value: V) {
-        if(map.size == size) {
-            map.remove(tail.key)
-            tail = tail.prev!!
-            tail.next = null
+        if (map.size >= size) {
+            map.remove(tail.prev!!.key)
+            tail.prev!!.remove()
         }
 
-        val newNode = Node(key)
-        head.prev = newNode
-        newNode.next = head
-        head = newNode
-        map[key] = value
+        val newNode = Node(key, value)
+        head.addAsNext(newNode)
+        map[key] = newNode
     }
 
     override fun remove(key: K): V? {
-        return map.remove(key)
+        return map.remove(key)?.value
     }
 
     override fun clear() {
@@ -41,12 +37,26 @@ class LruCache<K, V>(override val size: Int): Cache<K, V> {
     }
 }
 
-class Node<K>(val key: K?) {
-    var next: Node<K>? = null
-    var prev: Node<K>? = null
+class Node<K, V>(val key: K?, val value: V?) {
+    var next: Node<K, V>? = null
+    var prev: Node<K, V>? = null
 
     fun remove() {
         next?.prev = prev
         prev?.next = next
+    }
+
+    fun addAsNext(node: Node<K, V>) {
+        next!!.prev = node
+        node.next = next
+        node.prev = this
+        next = node
+    }
+
+    fun addAsPrev(node: Node<K, V>) {
+        prev!!.next = node
+        node.prev = prev
+        node.next = this
+        prev = node
     }
 }
