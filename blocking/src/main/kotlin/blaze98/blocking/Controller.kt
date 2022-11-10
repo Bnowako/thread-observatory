@@ -12,4 +12,16 @@ class Controller {
         println("sleep with sleepTimeMilli $sleepTimeMillis")
         Thread.sleep(sleepTimeMillis ?: 5000)
     }
+
+    @GetMapping("/objects/spawn")
+    fun createObjects(@RequestParam("count", required = false) count: Int?) {
+        println("/objects/spawn called with count: $count")
+        val heapObjects: MutableList<HeapObject> = mutableListOf()
+        for(i in 0..(count ?: 10)) {
+            heapObjects.add(HeapObject("objNo: $i", "$i", i))
+        }
+    }
+
 }
+
+data class HeapObject(val id: String, val value: String, val someInt: Int)
