@@ -24,7 +24,17 @@ brew install k6
 
 Sample usage of k6 scripts
 ### sleep.js
+
 This will mitigate waiting for some resource
+
+Variables:
+
+| Name              |    Type     | Default |
+|-------------------|:-----------:|--------:|
+| SLEEP_TIME_MILLIS |   number    |    1000 |
+| DURATION          |  number(s)  |      10 |
+| RATE              | number(rps) |      10 |
+
 ```bash
-k6 run -e SLEEP_TIME_MILLIS=100 load-tests/sleep.js
+k6 run -e SLEEP_TIME_MILLIS=100 -e RATE=30 -e DURATION=10 load-tests/sleep.js
 ```
