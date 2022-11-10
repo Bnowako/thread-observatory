@@ -28,6 +28,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.3.12.RELEASE")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.10.0")
 }
 
 tasks.withType<KotlinCompile> {

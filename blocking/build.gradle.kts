@@ -21,6 +21,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.3.12.RELEASE")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.10.0")
 }
 
 tasks.withType<KotlinCompile> {
